@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="app-header">
+            <h1>Weather Finder</h1>
+            <p class="subtitle">Enter a city name to see current weather</p>
+        </div>
+
+        <!-- Search Form -->
+        <form id="weatherForm" class="search-form">
+            <div class="search-input-group">
+                <input 
+                    type="text" 
+                    id="cityInput" 
+                    placeholder="Enter city name..." 
+                    class="city-input"
+                    autocomplete="off"
+                >
+                <button type="submit" class="search-btn">Search</button>
+            </div>
+            <div id="searchError" class="error-message" style="display: none;"></div>
+        </form>
+
+        <!-- Loading Indicator -->
+        <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+            <div class="spinner"></div>
+            <p>Fetching weather data...</p>
+        </div>
+
+        <!-- Weather Display -->
+        <div id="weatherContainer" class="weather-container" style="display: none;">
+            
+            <!-- Main Weather Card -->
+            <div class="weather-card">
+                <div class="weather-header">
+                    <div class="location-info">
+                        <h2 id="cityName" class="city-name"></h2>
+                        <p id="countryName" class="country-name"></p>
+                    </div>
+                    <img id="weatherIcon" class="weather-icon" src="" alt="Weather icon">
+                </div>
+
+                <div class="temperature-section">
+                    <div class="main-temp">
+                        <span id="temperature" class="temp-value"></span>
+                        <span class="temp-unit">°C</span>
+                    </div>
+                    <div class="description-section">
+                        <p id="description" class="weather-description"></p>
+                        <p id="feelsLike" class="feels-like"></p>
+                    </div>
+                </div>
+
+                <!-- Extended Weather Data Grid -->
+                <div class="weather-details-grid">
+                    <div class="detail-card">
+                        <div class="detail-icon">💧</div>
+                        <div class="detail-content">
+                            <p class="detail-label">Humidity</p>
+                            <p id="humidity" class="detail-value"></p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">💨</div>
+                        <div class="detail-content">
+                            <p class="detail-label">Wind Speed</p>
+                            <p id="windSpeed" class="detail-value"></p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">🌡️</div>
+                        <div class="detail-content">
+                            <p class="detail-label">Pressure</p>
+                            <p id="pressure" class="detail-value"></p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">☀️</div>
+                        <div class="detail-content">
+                            <p class="detail-label">UV Index</p>
+                            <p id="uvIndex" class="detail-value"></p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">👁️</div>
+                        <div class="detail-content">
+                            <p class="detail-label">Visibility</p>
+                            <p id="visibility" class="detail-value"></p>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-icon">🔄</div>
+                        <div class="detail-content">
+                            <p class="detail-label">Last Updated</p>
+                            <p id="lastUpdated" class="detail-value"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Message -->
+        <div id="welcomeMessage" class="welcome-message">
+            <p>👆 Search for a city to get started</p>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
