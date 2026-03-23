@@ -5,6 +5,33 @@ const searchError = document.getElementById('searchError');
 const loadingSpinner = document.getElementById('loadingSpinner');
 const weatherContainer = document.getElementById('weatherContainer');
 const welcomeMessage = document.getElementById('welcomeMessage');
+let currentTempC = null; // global
+let currentFeelsLikeC = null;
+
+const toggle = document.querySelector('#button-3 .checkbox');
+
+toggle.addEventListener('change', () => {
+    const tempEl = document.getElementById('temperature');
+    const feelsEl = document.getElementById('feelsLike');
+    const unitEl = document.querySelector('.temp-unit');
+
+    if (!currentTempC) return;
+
+    if (toggle.checked) {
+        // Convert to Fahrenheit
+        const tempF = cToF(currentTempC);
+        const feelsF = cToF(currentFeelsLikeC);
+
+        tempEl.textContent = tempF;
+        feelsEl.textContent = `Feels like ${feelsF}°F`;
+        unitEl.textContent = '°F';
+    } else {
+        // Back to Celsius
+        tempEl.textContent = currentTempC;
+        feelsEl.textContent = `Feels like ${currentFeelsLikeC}°C`;
+        unitEl.textContent = '°C';
+    }
+});
 
 // Form submission handler
 weatherForm.addEventListener('submit', async (e) => {
@@ -60,6 +87,14 @@ async function fetchWeather(city) {
     }
 }
 
+function cToF(c) {
+    return ((c * 9/5) + 32).toFixed(1);
+}
+
+function fToC(f) {
+    return ((f - 32) * 5/9).toFixed(1);
+}
+
 /**
  * Display weather information on the page
  */
@@ -69,9 +104,12 @@ function displayWeather(data) {
     document.getElementById('countryName').textContent = data.country;
     
     // Temperature and description
-    document.getElementById('temperature').textContent = data.temperature;
+    currentTempC = data.temperature;
+    currentFeelsLikeC = data.feels_like;
+
+    document.getElementById('temperature').textContent = currentTempC;
     document.getElementById('description').textContent = data.description;
-    document.getElementById('feelsLike').textContent = `Feels like ${data.feels_like}°C`;
+    document.getElementById('feelsLike').textContent = `Feels like ${currentFeelsLikeC}°C`;
     
     // Weather icon from OpenWeatherMap CDN
     const iconCode = data.icon;
